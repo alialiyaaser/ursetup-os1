@@ -1,0 +1,127 @@
+{
+  "theme": "The Command Center (Swiss High-Contrast / Objective / Functional)",
+  "description": "A highly professional, confident, data-rich internal Operating System dashboard for e-commerce operations. Avoid generic AI-slop (no purple gradients). It must feel systematic, crisp, precise, and authoritative. Must support seamless LTR/RTL switching and dark/light modes.",
+  "typography": {
+    "primary_font": "IBM Plex Sans, IBM Plex Sans Arabic, sans-serif",
+    "heading_font": "Outfit, Tajawal, sans-serif",
+    "mono_font": "JetBrains Mono, monospace",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl font-semibold tracking-tight",
+      "h2": "text-2xl sm:text-3xl font-medium tracking-tight",
+      "h3": "text-xl sm:text-2xl font-medium",
+      "h4": "text-lg font-medium",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm text-muted-foreground",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground"
+    },
+    "notes": "Use strict hierarchical scaling. Arabic requires slightly taller line-heights for legibility. Use logical text alignment utilities (`text-start`, `text-end`) instead of `text-left` or `text-right` to support RTL/LTR."
+  },
+  "colors": {
+    "light_mode": {
+      "background": "#F8FAFC",
+      "foreground": "#020617",
+      "card": "#FFFFFF",
+      "card_foreground": "#020617",
+      "primary": "#2563EB",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#F1F5F9",
+      "secondary_foreground": "#0F172A",
+      "muted": "#F1F5F9",
+      "muted_foreground": "#64748B",
+      "accent": "#FACC15",
+      "accent_foreground": "#020617",
+      "destructive": "#EF4444",
+      "border": "#E2E8F0",
+      "input": "#E2E8F0",
+      "ring": "#2563EB"
+    },
+    "dark_mode": {
+      "background": "#0B0F19",
+      "foreground": "#F8FAFC",
+      "card": "#111827",
+      "card_foreground": "#F8FAFC",
+      "primary": "#3B82F6",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#1E293B",
+      "secondary_foreground": "#F8FAFC",
+      "muted": "#1E293B",
+      "muted_foreground": "#94A3B8",
+      "accent": "#FACC15",
+      "accent_foreground": "#020617",
+      "destructive": "#F87171",
+      "border": "#1E293B",
+      "input": "#1E293B",
+      "ring": "#3B82F6"
+    },
+    "strategy": "Objective, stark, functional. Use white or stark dark backgrounds. Color is used ONLY for status indicators and primary CTAs. Avoid full screen gradients."
+  },
+  "layouts": {
+    "dashboard_grid": {
+      "type": "High Density Grid",
+      "structure": "Base Grid: `grid-cols-1 md:grid-cols-3 lg:grid-cols-4`, Tight Gap (`gap-4` or `gap-6`)",
+      "summary_cards": "col-span-1 (Single metric)",
+      "primary_data": "col-span-2 row-span-2 or col-span-3 (Main charts, logs)",
+      "feed_list": "col-span-1 row-span-2 (Tall narrow lists like tasks or recent activity)"
+    },
+    "rtl_support": "CRITICAL: ALWAYS use Tailwind logical properties. `ps-` instead of `pl-`, `pe-` instead of `pr-`, `ms-` instead of `ml-`, `me-` instead of `mr-`, `border-s` instead of `border-l`, `border-e` instead of `border-r`. Set `dir='rtl'` on the HTML tag or wrapper when Arabic is selected.",
+    "sidebar": "Responsive sidebar. Sticky on desktop, hamburger on mobile. Must slide from the Right in RTL mode, and Left in LTR mode.",
+    "top_bar": "Sticky top bar with glassmorphism or solid background. Contains language toggle, theme toggle, notifications, profile."
+  },
+  "components": {
+    "cards": "Subtle roundness (`rounded-lg` to `rounded-xl`). Flat backgrounds, 1px subtle border (`border-border`), no shadow by default. Hover adds slight lift (`-translate-y-[2px]`) and `shadow-md`.",
+    "buttons": "Pill-shaped or slightly rounded (`rounded-md`). Primary buttons use the strict blue color. Interaction animations via `active:scale-95 transition-transform`.",
+    "inputs": "Clean 1px borders, subtle focus ring (`focus:ring-2 focus:ring-primary focus:ring-offset-background`).",
+    "navigation": "Clear active state using a subtle background block and a left border (or start border in RTL) highlighting the active item."
+  },
+  "visual_enhancers": {
+    "glassmorphism": "Use sparingly for sticky headers and floating dropdowns. Dark mode: `bg-slate-900/80 backdrop-blur-md border-b border-white/10`.",
+    "borders": "Expose the skeleton for tabular data. Grid layout with visible internal borders (`border-collapse`, `border-b border-border/40`).",
+    "icons": "Use `lucide-react` for consistent, clean, objective icons. Size 16px to 20px for UI elements.",
+    "micro_interactions": "Subtle fades on mount, slight scales on clicks. No exaggerated bounciness."
+  },
+  "motion": {
+    "transitions": "Use specific transition properties, NOT `transition-all`. E.g., `transition-colors duration-200`, `transition-transform duration-200`.",
+    "entrance": "Staggered fade-up for dashboard widgets and lists using `framer-motion` if available, or simple CSS animations."
+  },
+  "image_urls": [
+    {
+      "url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4NTAyNTE1Mnww&ixlib=rb-4.1.0&q=85",
+      "category": "avatars",
+      "description": "Male employee avatar (Operations)"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4NTAyNTE1Mnww&ixlib=rb-4.1.0&q=85",
+      "category": "avatars",
+      "description": "Female employee avatar (CEO / Manager)"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4NTAyNTE1Mnww&ixlib=rb-4.1.0&q=85",
+      "category": "avatars",
+      "description": "Male employee avatar (Tech Support)"
+    }
+  ],
+  "accessibility": {
+    "contrast": "Ensure all text meets at least AA contrast standards against backgrounds.",
+    "focus": "Always provide visible focus indicators for keyboard navigation.",
+    "testing": "All interactive elements MUST have a `data-testid` attribute (e.g., `data-testid=\"login-submit-button\"`).",
+    "theme_toggle": "Provide explicit UI for Light/Dark mode and LTR/RTL switching."
+  },
+  "instructions_to_main_agent": [
+    "Prioritize logic and modularity. The 'UR SETUP OS' must feel like an extensible operating system.",
+    "Use Shadcn components for complex interactions (Dropdowns, Tabs, Dialogs) but strip generic styling to fit the objective 'Command Center' look.",
+    "Ensure RTL is implemented using `dir='rtl'` and Tailwind's logical properties (`-s`, `-e`). Never hardcode `ml-` or `pr-`.",
+    "Create a responsive Sidebar that works well in both LTR and RTL. In RTL, it should stick to the right edge.",
+    "For 'Coming Soon' placeholder pages, maintain consistent layout wrapper, header, and sidebar, and display a clean, centered message.",
+    "Avoid using purple gradients or generic SaaS illustrations. Stick to data, metrics, and functional UI.",
+    "For the Welcome Banner, display 'صباح الخير' or 'Good Morning' conditionally based on language and time of day."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid this.",
+    "Create depth through layered design elements with z-index hierarchy, crisp borders, and subtle shadows.",
+    "You MUST NOT apply universal transition. Eg: `transition: all`.",
+    "You MUST NOT center align the app container. Do not add `.App { text-align: center; }`.",
+    "Every interaction needs micro-animations - hover states, transitions, entrance animations. Static = dead.",
+    "Use generous padding inside containers. Use `sonner` for toasts.",
+    "Always use modern button styles, pill-shaped or sharp button with interaction animations."
+  ]
+}
