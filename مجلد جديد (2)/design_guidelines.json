@@ -63,9 +63,9 @@
       "primary_data": "col-span-2 row-span-2 or col-span-3 (Main charts, logs)",
       "feed_list": "col-span-1 row-span-2 (Tall narrow lists like tasks or recent activity)"
     },
-    "rtl_support": "CRITICAL: ALWAYS use Tailwind logical properties. `ps-` instead of `pl-`, `pe-` instead of `pr-`, `ms-` instead of `ml-`, `me-` instead of `mr-`, `border-s` instead of `border-l`, `border-e` instead of `border-r`. Set `dir='rtl'` on the HTML tag or wrapper when Arabic is selected.",
-    "sidebar": "Responsive sidebar. Sticky on desktop, hamburger on mobile. Must slide from the Right in RTL mode, and Left in LTR mode.",
-    "top_bar": "Sticky top bar with glassmorphism or solid background. Contains language toggle, theme toggle, notifications, profile."
+      "rtl_support": "CRITICAL: ALWAYS use Tailwind logical properties. `ps-` instead of `pl-`, `pe-` instead of `pr-`, `ms-` instead of `ml-`, `me-` instead of `mr-`, `border-s` instead of `border-l`, `border-e` instead of `border-r`. Set `dir='rtl'` on the HTML tag or wrapper when Arabic is selected.",
+      "sidebar": "Responsive sidebar. Sticky on desktop, hamburger on mobile. Must slide from the Right in RTL mode, and Left in LTR mode.",
+      "top_bar": "Sticky top bar with glassmorphism or solid background. Contains language toggle, theme toggle, notifications, profile."
   },
   "components": {
     "cards": "Subtle roundness (`rounded-lg` to `rounded-xl`). Flat backgrounds, 1px subtle border (`border-border`), no shadow by default. Hover adds slight lift (`-translate-y-[2px]`) and `shadow-md`.",
