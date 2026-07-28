@@ -401,7 +401,9 @@ async def login(payload: LoginIn):
     user = await db.users.find_one({"email": email})
     if not user or not verify_password(payload.password, user["password_hash"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")
+
     token = create_access_token(user["id"], user["email"], user["role"])
+
     return {
         "access_token": token,
         "token_type": "bearer",
@@ -414,6 +416,13 @@ async def login(payload: LoginIn):
         },
     }
 
+
+@auth_router.get("/me")
+async def auth_me(user: dict = Depends(get_current_user)):
+    return {
+        **user,
+        "permissions_effective": _perms_for(user)
+    }
 
 @auth_router.get("/me", response_model=UserPublic)
 async def me(user: dict = Depends(get_current_user)):
