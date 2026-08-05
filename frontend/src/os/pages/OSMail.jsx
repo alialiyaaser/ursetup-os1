@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { toast } from "sonner";
-import { Mail, Send, RefreshCw, Inbox } from "lucide-react";
+import { Send, RefreshCw } from "lucide-react";
 import { osApi } from "../api";
 
 export default function OSMail() {
