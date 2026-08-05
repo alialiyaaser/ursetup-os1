@@ -159,16 +159,7 @@ export default function OSTeamChat() {
     e.target.value = "";
   };
 
-  const deleteMessage = async (mid) => {
-    if (!window.confirm("حذف الرسالة؟")) return;
-    const ws = wsRef.current;
-    if (ws && ws.readyState === WebSocket.OPEN) {
-      ws.send(JSON.stringify({ type: "delete", message_id: mid }));
-    } else {
-      try { await osApi.delete(`/messages/${mid}`); loadMsg(active.id); }
-      catch (err) { toast.error(err.response?.data?.detail || "Failed"); }
-    }
-  };
+
 
   const typingNames = Object.values(typingUsers);
 
