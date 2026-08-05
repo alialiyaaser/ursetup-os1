@@ -1,0 +1,41 @@
+{
+  "summary": "Bug-fix verification for the OSTeamChat.jsx compile-corruption fix. Backend: reran full regression (test_uploads_and_perms.py 15/15 PASS) and added new iter2 suite covering messages read_by/mark_read/soft-delete, HR bonuses/deductions/promotions/penalties, and public /api/applications submit (8/8 PASS). Total 23/23 backend tests pass. Frontend: /os/login, /os (dashboard), /os/chat, /, /join-us all compile & render clean — no 'Compiled with problems' banner anywhere. CEO login works, redirect to /os succeeds, all 19 sidebar sections render (Arabic labels: الرئيسية, الطلبات, العملاء, المنتجات, التسويق, السوشيال ميديا, خدمة العملاء, الموارد البشرية, طلبات التوظيف, الموظفون, المهام, التقويم, دردشة الفريق, البريد, الملفات, الإشعارات, التحليلات, سجل الأنشطة, الإعدادات). Team Chat page shows LIVE WebSocket indicator, general channel selected, existing messages render with 'تم الإرسال' read markers.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/os/hr/promotions", "issue": "Payload requires both new_role AND to_role, and both date AND effective_date — duplicate field naming. Consider consolidating to a single field name."},
+      {"endpoint": "/api/applications", "issue": "Requires both name AND full_name, years AND experience_years, plus 'experiences' as free-text — duplicated schema fields; align frontend/back to single canonical names."},
+      {"endpoint": "/api/os/files/upload", "issue": "Cap still 50MB in code vs spec 100MB (carried from iter1)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_uploads_and_perms.py",
+    "/app/backend/tests/test_iter2_fixes.py",
+    "/app/test_reports/pytest/iter2_uploads.xml",
+    "/app/test_reports/pytest/iter2_new.xml"
+  ],
+  "action_items": [
+    "(Optional) Deduplicate HR promotion request schema (new_role vs to_role, date vs effective_date).",
+    "(Optional) Deduplicate /api/applications schema (name vs full_name, years vs experience_years).",
+    "(Optional) Raise upload cap to 100MB to match spec (server_ext.py)."
+  ],
+  "critical_code_review_comments": [
+    "OSTeamChat.jsx is now clean at 296 lines; lightbox state properly declared.",
+    "Backend schema duplication in HR + Applications endpoints is a code-hygiene smell but does not block functionality.",
+    "React Router future-flag warnings (v7_startTransition, v7_relativeSplatPath) appear in console — non-blocking, but should be opted-in before v7 upgrade.",
+    "One console 401 seen after login (likely a background /me poll during route transition) — not user-visible, but worth investigating."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter2_fixes.py"],
+  "success_rate": {"backend": "100% (23/23)", "frontend": "100% (all routes clean, login + chat verified)"},
+  "test_credentials": "CEO: teameagls0@gmail.com / URSetup@2026!",
+  "seed_data_creation": "New TEST_ employees + TEST_ HR records (bonus/deduction/promotion/penalty) + TEST_ application + a few chat messages in general channel. Consider periodic cleanup.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "OSTeamChat.jsx compile fix is verified. All prior + new tests green. Sidebar labels are Arabic (RTL) — do NOT test for English 'Dashboard/Orders/…' strings; use Arabic equivalents. Login redirects to /os and dashboard mounts fine. WebSocket chat shows 'LIVE' indicator. Gmail endpoints still return 500 (expected, per request). HR promotion + applications endpoints have duplicate field-name requirements; check test_iter2_fixes.py for correct payload shape.",
+  "rca of the issue": "Iter1's corrupted OSTeamChat.jsx (duplicate JSX after function close + missing lightbox useState) was cleaned up. Verified by direct file inspection (296 lines, clean) and by loading /os/chat which now renders without any 'Compiled with problems' overlay. No further action required."
+}

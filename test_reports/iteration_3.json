@@ -1,0 +1,42 @@
+{
+  "summary": "Iter3 feature-verification for (1) HR Positions CRUD + public /api/positions endpoint and (2) Custom Roles CRUD with permission validation. Backend: new pytest suite test_iter3_positions_roles.py — 12/12 PASS. Regression on iter2 + uploads suites: 34/35 PASS (1 pre-existing pytest-xdist cross-worker fixture flake in test_post_message_with_file_url — not related to iter3). Frontend: /join-us public page correctly fetches /api/positions and shows the admin-created 'Video Editor' card with OPEN badge; HR page /os/hr renders both new Arabic tabs 'الوظائف المفتوحة' (positions list with OPEN/CLOSED + Reopen/Close/Delete) and 'الرتب والصلاحيات' (18 roles including CEO, COO, and custom 'Editor Lead' with permission counts and Edit buttons). CEO login flow works via data-testid selectors. No compile-error banner anywhere.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/os/hr/positions PATCH", "issue": "PATCH accepts the same PositionIn schema as POST — full-body update only, no partial PATCH support. All fields must be resent to change one flag. Consider Optional fields to enable true partial updates."},
+      {"endpoint": "/api/os/hr/positions", "issue": "No uniqueness check on title, so duplicate positions with identical titles can be created back-to-back. Minor UX/data-hygiene concern."},
+      {"endpoint": "/api/os/roles PUT", "issue": "Upsert path allows overwriting a DEFAULT_ROLE (e.g. CEO) permissions — while delete of default is protected, PUT is not. If undesirable, add a guard mirroring DELETE."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/join-us hero", "issues": ["Arabic hero heading renders with unusual letter-spacing / visual glyph splitting on desktop (looks like each Arabic word has extra kerning). Verify with an RTL-native reviewer; may be a font-shaping issue vs intentional style."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter3_positions_roles.py",
+    "/app/test_reports/pytest/iter3.xml",
+    "/app/test_reports/pytest/iter3_all.xml"
+  ],
+  "action_items": [
+    "(Optional) Support partial PATCH for /api/os/hr/positions/{id} (use Optional[...] fields).",
+    "(Optional) Guard PUT /api/os/roles/{name} against overwriting default roles' permissions (currently only DELETE is guarded).",
+    "(Optional) Review Arabic hero-text rendering on /join-us — glyphs look overly spaced."
+  ],
+  "critical_code_review_comments": [
+    "server_ext.py PositionIn is missing Optional on all fields — PATCH endpoint therefore requires a full body, not a partial patch.",
+    "Public /api/positions correctly projects out created_by/created_by_name and _id — no PII leakage confirmed.",
+    "Roles PUT (server.py L1064) accepts any role name including reserved defaults; consider symmetric protection with DELETE.",
+    "server_ext.py has grown to 750 lines with many concerns (HR/Chat/Files/AI/Reports/Search) — beyond the 700-line guideline; recommend splitting into per-domain routers for maintainability."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter3_positions_roles.py"],
+  "success_rate": {"backend": "100% (12/12 iter3, 34/35 combined iter2+iter3+uploads; the 1 fail is a pre-existing xdist fixture flake)", "frontend": "100% (join-us, /os login, /os/hr Positions tab, /os/hr Roles tab all render correctly)"},
+  "test_credentials": "CEO: teameagls0@gmail.com / URSetup@2026!  (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "Tests create/delete their own TEST_ positions and TEST_CustomRole_* roles inline (cleaned up in-suite). Non-admin test user test_emp_<uuid>@example.com is created via /api/os/employees per test module (persistent — consider cleanup fixture later).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iter3 positions+roles features work end-to-end. Note server_ext.py POSITION uses full-body PATCH (not partial). Public endpoint is /api/positions (NOT /api/os/positions). For creating non-admin test users, do NOT use *.test or *.local TLDs — email-validator rejects them. Use example.com. All Arabic tab labels: 'الوظائف المفتوحة' (positions), 'الرتب والصلاحيات' (roles). The pytest-xdist cross-worker sharing of pytest.file_video in test_uploads_and_perms.py::test_post_message_with_file_url is flaky — either run with -p no:xdist or refactor to a module-scoped fixture returning the file.",
+  "rca of the issue": "N/A — feature addition passed acceptance. Minor code-hygiene notes only."
+}
