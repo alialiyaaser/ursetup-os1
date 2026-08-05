@@ -31,7 +31,6 @@ export default function OSPending() {
   const { user, logout, setUser, loading } = useAuth();
   const { lang } = useLang();
   const { theme } = useTheme();
-  const t = OS_T[lang];
   const e = EXTRA[lang];
   const k = tokens(theme);
   const navigate = useNavigate();
