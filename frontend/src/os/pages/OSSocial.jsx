@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import { toast } from "sonner";
-import { Plus, Sparkles, Trash2, Upload, Image as ImgIcon, Film, X, Info } from "lucide-react";
+import { Plus, Sparkles, Trash2, Image as ImgIcon, Film, X, Info } from "lucide-react";
 import { osApi } from "../api";
 import { PLATFORM_LIMITS, validateForPlatform } from "../socialLimits";
 
@@ -14,7 +14,7 @@ const PLATFORM_COLOR = {
 };
 
 export default function OSSocial() {
-  const { user, t, k, perms } = useOutletContext();
+  const { t, k, perms } = useOutletContext();
   const [posts, setPosts] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [filter, setFilter] = useState("all");
