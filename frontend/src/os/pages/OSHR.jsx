@@ -20,7 +20,7 @@ const TABS = [
 const ROLES = ["CEO","COO","HR Manager","Marketing Manager","Marketing","Operations Manager","Operations","Support Manager","Support","Finance Manager","Finance","Designer","Video Editor","Content Creator","Social Media Manager","Warehouse Manager","Employee","Intern"];
 
 export default function OSHR() {
-  const { t, k, perms, lang } = useOutletContext();
+  const { k, perms, lang } = useOutletContext();
   const [tab, setTab] = useState("attendance");
   const [state, setState] = useState({ attendance: [], leaves: [], payroll: [], evaluations: [], bonuses: [], deductions: [], promotions: [], penalties: [] });
   const [employees, setEmployees] = useState([]);
