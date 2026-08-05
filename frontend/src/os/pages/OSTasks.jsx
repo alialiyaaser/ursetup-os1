@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useOutletContext } from "react-router-dom";
 import { toast } from "sonner";
-import { Plus, Trash2, CheckCircle2 } from "lucide-react";
-import { osApi } from "../api";
-import { formatRelative } from "../i18n";
+import { Plus, Trash2 } from "lucide-react";
 
 const PRIORITY_COLOR = {
   low: "border-slate-400/30 text-slate-400",
