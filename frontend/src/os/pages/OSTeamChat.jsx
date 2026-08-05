@@ -1,16 +1,12 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useOutletContext } from "react-router-dom";
-import { Send, Plus, Hash, Paperclip, Zap, Check, CheckCheck, Trash2, Play, X } from "lucide-react";
+import { Send, Plus, Hash, Paperclip, Zap, Check, CheckCheck, X } from "lucide-react";
 import { osApi } from "../api";
 import { toast } from "sonner";
 
-const isImageUrl = (u) => u && /\.(jpg|jpeg|png|gif|webp|heic)$/i.test(u);
-const isVideoUrl = (u) => u && /\.(mp4|mov|webm|avi|mkv|m4v)$/i.test(u);
-const isAudioUrl = (u) => u && /\.(mp3|wav|m4a|ogg|aac|flac)$/i.test(u);
-const mediaFull = (u) => `${process.env.REACT_APP_BACKEND_URL}${u}`;
 
 export default function OSTeamChat() {
-  const { user, t, k } = useOutletContext();
+  const { user, k } = useOutletContext();
   const [channels, setChannels] = useState([]);
   const [active, setActive] = useState(null);
   const [messages, setMessages] = useState([]);
